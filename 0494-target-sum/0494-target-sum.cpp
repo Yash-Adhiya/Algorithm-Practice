@@ -36,9 +36,9 @@ public:
             sum+=nums[i];
         }
         
-        if((sum-target)<0) return 0;
-        if((sum-target)%2==1) return 0;
-        int newtarget = (sum-target)/2; 
+        if((sum+target)<0) return 0;
+        if((sum+target)%2==1) return 0;
+        int newtarget = (sum+target)/2; 
          vector<vector<int>> dp(n+1,vector<int>(newtarget+1,-1));
         
         return f(n-1,newtarget,n,nums,dp);
