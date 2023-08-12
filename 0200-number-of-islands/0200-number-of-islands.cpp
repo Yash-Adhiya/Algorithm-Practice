@@ -1,13 +1,21 @@
 class Solution {
 public:
+    vector<int> dir = {-1,0,1,0,-1};
     
     void dfs(int row,int col,vector<vector<int>> &vis,vector<vector<char>>& grid){
-        if(row<0 or col<0 or row>=grid.size() or col>=grid[0].size() or grid[row][col]=='0' or vis[row][col]==1) return;
         vis[row][col]=1;
-        dfs(row+1,col,vis,grid);
-        dfs(row,col-1,vis,grid);
-        dfs(row-1,col,vis,grid);
-        dfs(row,col+1,vis,grid);
+        for(int k=0;k<4;k++)
+        {
+            int nrow = row + dir[k];
+            int ncol = col + dir[k+1];
+            if(nrow>=0 and nrow<grid.size() and ncol>=0 and ncol<grid[0].size())
+            {
+                if(grid[nrow][ncol]=='1' and vis[nrow][ncol]==0)
+                {
+                    dfs(nrow,ncol,vis,grid);
+                }
+            }
+        }
         
     }
     int numIslands(vector<vector<char>>& grid) {
