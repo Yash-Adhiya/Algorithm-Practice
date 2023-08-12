@@ -8,33 +8,33 @@ using namespace std;
 
 class Solution {
   public:
-  void dfs(int node,int V, vector<int> &vis,vector<int> g[]){
+  void dfs(int node,int V, vector<int> &vis,vector<vector<int>> &adj){
       vis[node] = 1;
       
-      for(auto &child: g[node]){
-          if(vis[child]==0){
-              dfs(child,V,vis,g);
+      for(int i=0;i<V;i++){
+          if(adj[node][i]==1 and vis[i]==0){
+              dfs(i,V,vis, adj);
           }
       }
   }
   
     int numProvinces(vector<vector<int>> adj, int V) {
         // code here
-        vector<int> g[V];
-        for(int i=0;i<adj.size();i++){
-            for(int j=0;j<adj[i].size();j++){
-                if(adj[i][j]==1 and i!=j){
-                    g[i].push_back(j);
-                }
-            }
-        }
+        // vector<int> g[V];
+        // for(int i=0;i<adj.size();i++){
+        //     for(int j=0;j<adj[i].size();j++){
+        //         if(adj[i][j]==1 and i!=j){
+        //             g[i].push_back(j);
+        //         }
+        //     }
+        // }
         
         vector<int> vis(V,0);
         int ct = 0;
         for(int i = 0;i<V;i++){
             if(vis[i]==0){
                 ct++;
-                dfs(i,V,vis,g);
+                dfs(i,V,vis,adj);
             }
         }
         
