@@ -17,9 +17,24 @@ public:
     }
     int minimumTotal(vector<vector<int>>& triangle) {
         int n = triangle.size();
-        int m = triangle[n-1].size();
-        vector<vector<int>> dp(n,vector<int> (m,-1));
         
-        return f(0,0,triangle,dp);
+        vector<int> front(n,0),cur(n,0);
+        for(int j=0;j<n;j++){
+            front[j] = triangle[n-1][j];
+        }
+        for(int i=n-2;i>=0;i--){
+            for(int j=i;j>=0;j--){
+                int up = triangle[i][j] + front[j];
+                int slant = triangle[i][j] + front[j+1];
+                
+                cur[j] = min(up,slant);
+            }
+            front = cur;
+        }
+        
+        
+        
+        return front[0];
+        
     }
 };
