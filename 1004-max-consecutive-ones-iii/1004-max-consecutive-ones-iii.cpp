@@ -15,7 +15,9 @@ public:
                 if(nums[i]==0) zc--;
                 i++;
             }
-            ans = max(ans,j-i+1);
+            if(zc<=k){
+                ans = max(ans,j-i+1);
+            }
             j++;
         }
         
